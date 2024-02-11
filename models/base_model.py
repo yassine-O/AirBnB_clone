@@ -16,13 +16,13 @@ class BaseModel():
                 if key == "created_at":
                     self.created_at = datetime.strptime(value,
                                                         "%Y-%m-%dT%H:%M:%S.%f")
-                elif key = "updated_at":
+                elif key == "updated_at":
                     self.updated_at = datetime.strptime(value,
                                                         "%Y-%m-%dT%H:%M:%S.%f")
                 elif key == "__class__":
                     continue
                 else:
-                    setattr(self, key, val)
+                    setattr(self, key, value)
         else:
             self.id = str(uuid4())
             self.created_at = datetime.now()
