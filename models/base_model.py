@@ -9,11 +9,24 @@ from uuid import uuid4
 class BaseModel():
     """ Base class for Airbnb clone project """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """ BaseModel Constructor """
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        if kwargs:
+            for key, value in kwargs.items():
+                if key == "created_at":
+                    self.created_at = datetime.strptime(value,
+                                                        "%Y-%m-%dT%H:%M:%S.%f")
+                elif key = "updated_at":
+                    self.updated_at = datetime.strptime(value,
+                                                        "%Y-%m-%dT%H:%M:%S.%f")
+                elif key == "__class__":
+                    continue
+                else:
+                    setattr(self, key, val)
+        else:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
 
     def __str__(self):
         """ [<class name>] (<self.id>) <self.__dict__> """
