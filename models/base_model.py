@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 
+""" Module BaseModel : Parent class """
+
 from datetime import datetime
 from uuid import uuid4
-
-""" Module BaseModel : Parent class """
 
 
 class BaseModel():
