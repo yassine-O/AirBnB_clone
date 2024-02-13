@@ -4,6 +4,7 @@
 
 import json
 from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
@@ -11,6 +12,7 @@ class FileStorage:
 
     __file_path = 'file.json'
     __objects = {}
+    model_dict = {"BaseModel": BaseModel, "User": User}
 
     def all(self):
         """ returns the dictionary __objects """
@@ -37,7 +39,7 @@ class FileStorage:
             with open(self.__file_path, 'r') as file:
                 dict = json.load(file)
             for key, val in dict.items():
-                obj = BaseModel(**val)
+                obj = self.model_dict[val["__class__"]](**val)
                 self.__objects[key] = obj
         except FileNotFoundError:
             pass
